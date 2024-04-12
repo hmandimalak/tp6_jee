@@ -25,14 +25,14 @@
  </form>
  <table class="table table-striped">
  <tr>
- <th>ID</th><th>Nom Medecin</th><th>specialite</th><th>faculte</th>
+ <th>ID</th><th>Nom Medecin</th><th>specialite</th>
  </tr>
  <c:forEach items="${model.Medecin}" var="m">
  <tr>
  <td>${m.idMedecin }</td>
  <td>${m.nomMedecin }</td>
  <td>${m.specialite }</td>
- <td>${m.faculte }</td>
+
  
  <td><a onclick="return confirm('Etes-vous sûr ?')"
 href="supprimer.do?id=${m.idMedecin }">Supprimer</a></td>

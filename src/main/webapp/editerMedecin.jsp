@@ -30,10 +30,7 @@
        <label class="control-label">specialite :</label>
        <input type="text" name="specialite" class="form-control" value="${Medecin.specialite}"/>
       </div>
-       <div class="form-group">
-       <label class="control-label">faculte :</label>
-       <input type="text" name="faculte" class="form-control" value="${Medecin.faculte}"/>
-      </div>
+       
       <div>
         <button type="submit" class="btn btn-primary">Modifier</button>
       </div>

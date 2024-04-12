@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.connector.Response;
 
+import dao.FaculteDaolmpl;
+import dao.IFaculteDao;
 import dao.IMedecinDao;
 import dao.IMedecinDao;
 import dao.MedecinDaoImpl;
@@ -21,9 +23,11 @@ import metier.entities.Medecin;
 public class ControleurServlet extends HttpServlet {
 	
 	 IMedecinDao metier;
+	 IFaculteDao metierFac;
 	 @Override
 	public void init() throws ServletException {
 		metier = new MedecinDaoImpl();
+		metierFac = new FaculteDaolmpl();
 	}
 	
 	@Override
@@ -47,16 +51,20 @@ public class ControleurServlet extends HttpServlet {
 		}
 		else if (path.equals("/saisie.do")  )
 		{
+			List<Faculte> facs = metierFac.getAllFacultes();
+			FaculteModel model= new FaculteModel();
+			model.setFacultes(facs);
+			request.setAttribute("facModel", model);
 			request.getRequestDispatcher("saisieMedecin.jsp").forward(request,response);
 		}
 		else if (path.equals("/save.do")  && request.getMethod().equals("POST"))
 		{
-		    String nom=request.getParameter("nom");
-		    String specialite=request.getParameter("specialite");
-		    String faculte=request.getParameter("faculte");
-			Medecin m = metier.save(new Medecin(nom,specialite,faculte));
+			String nom=request.getParameter("nom");
+			Long faculteId=Long.parseLong(request.getParameter("Faculte"));
+			Faculte fac = metierFac.getFaculte(FaculteId);
+			Medecin p = metier.save(new Medecin(nom,fac));
 			request.setAttribute("Medecin", m);
-			request.getRequestDispatcher("confirmation.jsp").forward(request,response);
+			response.sendRedirect("chercher.do?motCle=");
 		}
 		else if (path.equals("/supprimer.do"))
 		{
@@ -75,18 +83,16 @@ public class ControleurServlet extends HttpServlet {
 		}
 		else if (path.equals("/update.do")  )
 		{
-			 Long id = Long.parseLong(request.getParameter("id"));
-			 String nom=request.getParameter("nom");
-			 String specialite=request.getParameter("specialite");
-			 String faculte=request.getParameter("faculte");
-			 Medecin m = new Medecin();
-			 m.setIdMedecin(id);
-			 m.setNomMedecin(nom);
-			 m.setspecialite(specialite);
-			 m.setFaculte(faculte);
-			 metier.updateMedecin(m);
-			 request.setAttribute("Medecin", m);
-			 request.getRequestDispatcher("confirmation.jsp").forward(request,response);
+			Long id = Long.parseLong(request.getParameter("id"));
+			String nom=request.getParameter("nom");
+			Long faculteId=Long.parseLong(request.getParameter("faculte"));
+			Faculte m = new Faculte();
+			m.setIdFaculte(id);
+			m.setNomFaculte(nom);
+			Faculte fac = metierFac.getFaculte(faculteId);
+			m.setCategorie(fac);
+			metier.updateFaculte(m);
+			response.sendRedirect("chercher.do?motCle=");
 		}
 		else
 		{

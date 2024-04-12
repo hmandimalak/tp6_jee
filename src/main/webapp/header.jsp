@@ -7,6 +7,12 @@
  <li class="nav-item">
  <a class="nav-link" href="saisie.do">Saisie</a>
  </li>
+ <li class="nav-item active">
+<a class="nav-link" href="facultes">facultes</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="saisieFaculte">Saisie faculte</a>
+</li>
  </ul>
  </div>
 </nav>

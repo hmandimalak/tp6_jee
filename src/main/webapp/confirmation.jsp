@@ -34,11 +34,6 @@ value="${Medecin.nomMedecin }"/>
  <input type="text" name="specialite" class="form-control"
 value="${Medecin.specialite }"/>
  </div>
-  <div class="control-label">
- <label class="control-label">faculte :</label>
- <input type="text" name="faculte" class="form-control"
-value="${Medecin.faculte }"/>
- </div>
  </div>
 
  </div>

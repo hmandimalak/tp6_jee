@@ -1,8 +1,18 @@
 package metier.entities;
-
+import javax.persistence.Entity;
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Id;
+@Entity
+
+
+
 public class Medecin implements Serializable{
+	
+	@Id
+	@Column (name="ID_MEDECIN")
 	private Long idMedecin;
+	@Column (name="NOM_MEDECIN")
 	private String nomMedecin;
 	private String specialite;
 	private String faculte;
@@ -15,6 +25,7 @@ public class Medecin implements Serializable{
 		this.specialite = specialite;
 		this.faculte=faculte;
 	}
+	
 	public Long getIdMedecin() {
 		return idMedecin;
 	}
@@ -33,16 +44,9 @@ public class Medecin implements Serializable{
 	public void setspecialite(String specialite) {
 		this.specialite = specialite;
 	}
-	public String getFaculte() {
-		return faculte;
-	}
-	public void setFaculte(String faculte) {
-		this.faculte = faculte;
-	}
 	@Override
 	public String toString() {
-		return "Medecin [idMedecin=" + idMedecin + ", nomMedecin=" + nomMedecin + ", specialite=" + specialite
-				+ ", faculte=" + faculte + "]";
+		return "Medecin [idMedecin=" + idMedecin + ", nomMedecin=" + nomMedecin + ", specialite=" + specialite + "]";
 	}
 
 }
